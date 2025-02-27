@@ -34,7 +34,6 @@ export default function AdminLiveLocation() {
 
   return (
     <div>
-      <h1>Live Location for User</h1>
       {location_data.length !== 0 ? (
         <MapComponent
           locations={

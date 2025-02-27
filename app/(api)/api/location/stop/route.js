@@ -1,5 +1,5 @@
-import { connectDB } from "@/app/api/lib/db";
-import Location from "@/app/api/models/Location";
+import { connectDB } from "@/app/(api)/api/lib/db";
+import Location from "@/app/(api)/api/models/Location";
 
 export async function POST(req) {
   // Parse query parameters using URLSearchParams

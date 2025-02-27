@@ -19,8 +19,8 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center p-6">
-      <div className="w-full max-w-4xl bg-white shadow-lg rounded-lg p-6">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+      <div className="w-full max-w-4xl bg-white shadow-xl rounded-lg p-8 md:p-10 lg:p-12">
+        <h1 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-6 text-center">
           Admin Dashboard
         </h1>
 
@@ -41,20 +41,22 @@ export default function AdminDashboard() {
             {users.map((user) => (
               <li
                 key={user._id}
-                className="p-4 flex justify-between items-center hover:bg-gray-100 transition duration-200 cursor-pointer rounded-lg"
+                className="p-4 flex justify-between items-center hover:bg-gray-50 transition duration-300 ease-in-out cursor-pointer rounded-lg transform hover:scale-105"
                 onClick={() => router.push(`/admin/location/${user._id}`)}
               >
                 <span className="text-lg font-medium text-gray-700">
                   {user.username}
                 </span>
-                <button className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition">
+                <button className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
                   View Locations
                 </button>
               </li>
             ))}
           </ul>
         ) : (
-          <p className="text-gray-500 text-center">No users found.</p>
+          <p className="text-gray-500 text-center text-lg mt-6">
+            No users found.
+          </p>
         )}
       </div>
     </div>

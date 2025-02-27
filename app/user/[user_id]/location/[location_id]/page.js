@@ -24,7 +24,6 @@ export default function LiveLocation() {
 
   return (
     <div>
-      <h1>Location</h1>
       {/* {liveData && liveData.message} */}
       {location_data.length !== 0 ? (
         <MapComponent locations={location_data[0].locations} />

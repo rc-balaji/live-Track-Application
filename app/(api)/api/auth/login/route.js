@@ -1,5 +1,5 @@
-import { connectDB } from "@/app/api/lib/db";
-import User from "@/app/api/models/User";
+import { connectDB } from "@/app/(api)/api/lib/db";
+import User from "@/app/(api)/api/models/User";
 
 export async function POST(req) {
   await connectDB();

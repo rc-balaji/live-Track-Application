@@ -62,7 +62,7 @@ export default function LiveLocation() {
       ) : (
         <button onClick={startTracking}>Start</button>
       )}
-      {liveData && <MapComponent locations={liveData.locations} />}
+      {/* {liveData && <MapComponent locations={liveData.locations} />} */}
     </div>
   );
 }
