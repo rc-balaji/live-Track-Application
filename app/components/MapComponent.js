@@ -86,7 +86,7 @@ export default function MapComponent({ locations }) {
           <Marker position={startPos} icon={firstMarkerIcon} />
 
           {/* Last Marker */}
-          <Marker position={endPos} icon={lastMarkerIcon} />
+          <Marker position={endPos} icon={firstMarkerIcon} />
         </>
       )}
     </MapContainer>
