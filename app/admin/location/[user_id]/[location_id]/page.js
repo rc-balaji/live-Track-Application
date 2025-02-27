@@ -12,10 +12,22 @@ export default function AdminLiveLocation() {
   const [liveData, setLiveData] = useState(null);
 
   useEffect(() => {
-    fetch(`/api/location/fetch/${location_id}?user_id=${user_id}`)
-      .then((res) => res.json())
-      .then(setLiveData);
-  }, []);
+    const fetchData = () => {
+      fetch(`/api/location/fetch/${location_id}?user_id=${user_id}`)
+        .then((res) => res.json())
+        .then(setLiveData)
+        .catch((error) => console.error("Error fetching data:", error));
+    };
+
+    // Initial fetch
+    fetchData();
+
+    // Fetch every 3 seconds
+    const intervalId = setInterval(fetchData, 3000);
+
+    // Cleanup interval on unmount
+    return () => clearInterval(intervalId);
+  }, [user_id, location_id]); // Re-run effect when params change
 
   const location_data = liveData ? liveData.location : [];
   console.log(location_data);
