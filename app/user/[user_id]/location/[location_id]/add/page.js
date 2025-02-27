@@ -113,17 +113,58 @@ export default function LiveLocation() {
   };
 
   if (loading) {
-    return <p>Checking location permission...</p>;
+    return (
+      <div className="w-full h-screen flex justify-center items-center bg-gray-100">
+        <div className="w-24 h-24 bg-gray-300 animate-pulse rounded-full"></div>
+      </div>
+    );
   }
 
   return (
-    <div>
-      <h1>Live Tracking: {location_id || "Unknown"}</h1>
-      {tracking ? (
-        <button onClick={stopTracking}>Stop Tracking</button>
-      ) : (
-        <button onClick={startTracking}>Start Tracking</button>
-      )}
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4 py-6">
+      <h1 className="text-2xl font-semibold text-gray-800 mb-6">
+        Live Tracking: {location_id || "Unknown"}
+      </h1>
+
+      <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-md">
+        <div className="text-center mb-6">
+          <p className="text-gray-600 mb-2">Tracking Status: </p>
+          <p
+            className={`${
+              tracking ? "text-green-600" : "text-red-600"
+            } font-semibold text-lg`}
+          >
+            {tracking ? "Active" : "Inactive"}
+          </p>
+        </div>
+
+        <div className="flex justify-center gap-4">
+          {tracking ? (
+            <button
+              onClick={stopTracking}
+              className="px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-500 transition duration-300"
+            >
+              Stop Tracking
+            </button>
+          ) : (
+            <button
+              onClick={startTracking}
+              className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-500 transition duration-300"
+            >
+              Start Tracking
+            </button>
+          )}
+        </div>
+      </div>
+
+      <div className="mt-6 text-center">
+        <button
+          onClick={() => router.back()}
+          className="text-gray-600 hover:text-gray-800 underline"
+        >
+          Go Back
+        </button>
+      </div>
     </div>
   );
 }

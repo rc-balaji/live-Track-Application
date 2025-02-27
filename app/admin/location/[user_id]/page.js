@@ -6,6 +6,7 @@ export default function AdminLiveLocation() {
   const { user_id } = useParams();
   const [liveData, setLiveData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [statusFilter, setStatusFilter] = useState("all"); // State for filtering by status
   const router = useRouter();
 
   useEffect(() => {
@@ -18,12 +19,53 @@ export default function AdminLiveLocation() {
       .catch(() => setLoading(false)); // Handle errors and loading state
   }, [user_id]);
 
+  // Filter locations based on selected status
+  const filteredLiveData = liveData?.filter((loc) => {
+    if (statusFilter === "all") return true; // Show all statuses
+    return loc.status === statusFilter; // Filter based on status
+  });
+
+  // Sort locations by location_id in descending order
+  const sortedLiveData = filteredLiveData?.sort((a, b) =>
+    b._id > a._id ? 1 : -1
+  );
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center p-6">
       <div className="w-full max-w-4xl bg-white shadow-lg rounded-lg p-6 md:p-8 lg:p-10">
         <h1 className="text-3xl font-semibold text-gray-800 mb-6 text-center">
-          Live Locations
+          Locations
         </h1>
+
+        {/* Filter Controls */}
+        <div className="flex justify-between items-center mb-4">
+          <div className="flex space-x-4">
+            <button
+              className={`px-4 py-2 rounded-lg text-white ${
+                statusFilter === "all" ? "bg-blue-500" : "bg-gray-300"
+              }`}
+              onClick={() => setStatusFilter("all")}
+            >
+              All
+            </button>
+            <button
+              className={`px-4 py-2 rounded-lg text-white ${
+                statusFilter === "live" ? "bg-green-500" : "bg-gray-300"
+              }`}
+              onClick={() => setStatusFilter("live")}
+            >
+              Live
+            </button>
+            <button
+              className={`px-4 py-2 rounded-lg text-white ${
+                statusFilter === "end" ? "bg-red-500" : "bg-gray-300"
+              }`}
+              onClick={() => setStatusFilter("end")}
+            >
+              Ended
+            </button>
+          </div>
+        </div>
 
         {loading ? (
           <ul className="space-y-4">
@@ -37,9 +79,9 @@ export default function AdminLiveLocation() {
               </li>
             ))}
           </ul>
-        ) : liveData?.length > 0 ? (
+        ) : sortedLiveData?.length > 0 ? (
           <ul className="space-y-4 divide-y divide-gray-200">
-            {liveData.map((loc) => (
+            {sortedLiveData.map((loc) => (
               <li
                 key={loc._id}
                 className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer"
@@ -53,7 +95,7 @@ export default function AdminLiveLocation() {
                   </h2>
                   <span
                     className={`px-3 py-1 text-sm rounded-full ${
-                      loc.status === "active"
+                      loc.status === "live"
                         ? "bg-green-100 text-green-800"
                         : "bg-red-100 text-red-800"
                     }`}

@@ -135,6 +135,8 @@ export default function MapComponent({ locations }) {
       <MapContainer
         center={endPos}
         zoom={20}
+        maxZoom={18}
+        
         style={{ height: "100vh", width: "100vw" }} // Full page size
         whenCreated={(map) => (mapRef.current = map)}
       >
