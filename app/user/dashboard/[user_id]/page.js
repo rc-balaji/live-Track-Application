@@ -42,19 +42,20 @@ export default function UserDashboard() {
       <h1>User Dashboard</h1>
       <button onClick={addLocation}>Add Location</button>
       <ul>
-        {locations.map(
-          (loc) =>
-            loc.status === "end" && (
-              <li
-                key={loc._id}
-                onClick={() =>
-                  router.push(`/user/${user_id}/location/${loc._id}`)
-                }
-              >
-                {loc.name} - {loc.status}
-              </li>
-            )
-        )}
+        {locations.map((loc) => (
+          <li
+            key={loc._id}
+            onClick={() => {
+              if (loc.status === "live") {
+                router.push(`/user/${user_id}/location/${loc._id}/add`);
+              } else {
+                router.push(`/user/${user_id}/location/${loc._id}`);
+              }
+            }}
+          >
+            {loc.name} - {loc.status}
+          </li>
+        ))}
       </ul>
     </div>
   );

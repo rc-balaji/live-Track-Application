@@ -39,7 +39,7 @@ export default function AdminLiveLocation() {
         <MapComponent
           locations={
             location_data[0].status === "live"
-              ? [location_data[0].locations[0]]
+              ? [location_data[0].locations.slice(-1)[0]]
               : location_data[0].locations
           }
         />

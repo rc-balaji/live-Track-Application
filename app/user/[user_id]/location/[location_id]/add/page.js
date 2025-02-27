@@ -15,6 +15,7 @@ export default function LiveLocation() {
 
   useEffect(() => {
     requestPermission(); // Check permission on mount
+    startTracking();
   }, []);
 
   // Function to check & request location permission

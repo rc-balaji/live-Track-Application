@@ -1,5 +1,5 @@
-import { connectDB } from "@/app/lib/db";
-import Location from "@/app/models/Location";
+import { connectDB } from "@/app/api/lib/db";
+import Location from "@/app/api/models/Location";
 
 export async function GET(req) {
   const { user_id, location_id } = req.url.split("?")[1].split("=")[1]; // Get user_id from query params
