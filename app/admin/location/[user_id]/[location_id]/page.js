@@ -23,9 +23,14 @@ export default function AdminLiveLocation() {
   return (
     <div>
       <h1>Live Location for User</h1>
-      {/* {liveData && liveData.message} */}
-      {location_data.length === 0 ? (
-        <MapComponent locations={location_data} />
+      {location_data.length !== 0 ? (
+        <MapComponent
+          locations={
+            location_data[0].status === "live"
+              ? [location_data[0].locations[0]]
+              : location_data[0].locations
+          }
+        />
       ) : (
         "Not Found"
       )}

@@ -3,10 +3,6 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useParams, useRouter } from "next/navigation";
 
-const MapComponent = dynamic(() => import("../../../components/MapComponent"), {
-  ssr: false,
-});
-
 export default function AdminLiveLocation() {
   const { user_id } = useParams();
   const [liveData, setLiveData] = useState(null);
