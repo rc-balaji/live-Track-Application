@@ -7,6 +7,10 @@ export async function POST(req) {
 
   const location_id = url.searchParams.get("location_id");
 
+
+  console.log();
+  
+
   try {
     await connectDB();
     const location = await Location.findOne({ location_id, status: "live" });

@@ -9,6 +9,8 @@ export async function POST(req) {
   const longitude = url.searchParams.get("longitude");
   const user_id = url.searchParams.get("user_id");
 
+  console.log(location_id, latitude, longitude, user_id);
+
   try {
     await connectDB();
 
